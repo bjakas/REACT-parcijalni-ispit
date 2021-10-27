@@ -1,40 +1,54 @@
 import { useState, useEffect } from 'react';
+import './UserList.css';
 
 export default function UserList(props) {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const [repo, setRepo] = useState([]);
+  const [typedInUser, setUser] = useState([]);
+  const [userError, setUserError] = useState(null);
+  const [repositories, setRepositories] = useState([]);
+  const [repositoriesError, setRepositoriesError] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.github.com/users/facebook")
+    fetch(`https://api.github.com/users/${props.user}`)
       .then(response => response.json())
       .then(json => setUser(json))
-      .catch(error => setError(error))
+      .catch(userError => setUserError(userError))
 
-    fetch("https://api.github.com/users/facebook/repos")
+    fetch(`https://api.github.com/users/${props.user}/repos`)
       .then(response => response.json())
-      .then(json => setRepo(json))
-      .catch(error => setError(error))
-  }, []);
+      .then(json => setRepositories(json))
+      .catch(repositoriesError => setRepositoriesError(repositoriesError))
+  }, [props.user]); // gledamo usera
 
-  if (error !== null) { return <div>Sorry, there has been an error while retrieving data...</div> };
-  if (user === null) { return <div>Data is loading...</div> };
-  if (repo === null) { return <div>No repositories to show!</div> };
+  if (userError !== null || repositoriesError !== null) { return <div>Sorry, there has been an error while retrieving data...</div> };
+  if (typedInUser === null || repositories === null) { return <div>Data is loading...</div> };
 
   return (
     <div>
-      <p>User login is: <b>{user.login}</b></p>
-      <img src={user.avatar_url} alt={user.name} />
-      <p>User name is: <b>{user.name}</b> </p>
-      <p>User is located at: <b>{user.location}</b></p>
-      <p>User has: <b>{user.followers} followers</b></p>
-      <p>User is following: <b>{user.following} other users</b></p>
-      <div>Repositories:
-        {repo.map((item) =>
-          <ul>
-            <li id={item.id}>{item.name}</li>
-          </ul>
-        )}
+      <div>
+        <img className="avatar" src={typedInUser.avatar_url} alt={typedInUser.login} />
+        <p><b>User:</b> {typedInUser.name}</p>
+        <p><b>Location:</b> {typedInUser.location}</p>
+        <p><b>Bio:</b> {typedInUser.bio}</p>
+        <p><b>User has:</b> {typedInUser.followers} followers</p>
+        <p><b>User is following:</b> {typedInUser.following} other users</p>
+      </div>
+      <div>
+        <table>
+          <caption><u>Repositories:</u></caption>
+          <tbody>
+            {/* {repositories.map((item, index) => (
+              <tr key={index}>
+                <td id={item.id}>{item.name}</td>
+              </tr>
+            )
+            )} */}
+            {repositories.map((item) => (
+              <tr key={item.id}>
+                <td>{item.name}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

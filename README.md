@@ -2,12 +2,14 @@
 
 ---
 
-## Link
+# Exam - React
 
-- https://bjakas-react-parcijalni-ispit.netlify.app/
+Exam solution for user search using GitHub API.
+
+**Try it out**: https://bjakas-react-parcijalni-ispit.netlify.app/
 
 ## Instructions
 
-- npm install
-- npm run start
-
+- `npm install`
+- `npm run start`
+- `npm run build`

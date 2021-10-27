@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 18px;
+	font-family: monospace;
+}
+
+body {
+	background: rgb(224, 217, 217);
+	font-size: 1rem;
+	margin-left: 50px;
+}
+
+h1 {
+	font-size: 3rem;
+	color: rgb(5, 68, 119);
+}
+
+input, textarea, button, select {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.App {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: left;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+p {
+	margin-top: 0px;
+	margin-bottom: 15px;
+}

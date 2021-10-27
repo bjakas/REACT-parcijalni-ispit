@@ -1,0 +1,43 @@
+.SearchForm__row input[type="text"] {
+  background-color: #eeeddf;
+  display: block;
+  width: 100%;
+}
+
+input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid white;
+}
+
+label {
+  margin-right: 5px;
+}
+
+.goButton {
+  padding: 5px 10px;
+  margin-left: 25px;
+  border: none;
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.resetButton {
+  padding: 5px 10px;
+  margin-left: 25px;
+  border: none;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.goButton:hover {
+  background-color: rgb(49, 57, 172);
+}
+
+.resetButton:hover {
+  background-color: rgb(172, 49, 49);
+}
