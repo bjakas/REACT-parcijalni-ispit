@@ -32,7 +32,7 @@ export default function UserList(props) {
   }, [props.user]); // gledamo usera
 
 
-  if (userError !== null || repositoriesError !== null) { return <div className="error-message">Sorry, user you choose doesn't exist. Try with another input.</div> };
+  if (userError !== null || repositoriesError !== null) { return <div className="error-message">User not found. Try with another input.</div> };
   if (typedInUser === null || repositories === null) { return <div className="data-message">Data is loading...</div> };
 
   return (
