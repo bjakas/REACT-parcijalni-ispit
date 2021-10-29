@@ -2,32 +2,35 @@ import { useState, useEffect } from 'react';
 import './UserList.css';
 
 export default function UserList(props) {
-  const [typedInUser, setUser] = useState([]);
+  const [typedInUser, setUser] = useState(null);
   const [userError, setUserError] = useState(null);
-  const [repositories, setRepositories] = useState([]);
+  const [repositories, setRepositories] = useState(null);
   const [repositoriesError, setRepositoriesError] = useState(null);
 
   useEffect(() => {
-    fetch(`https://api.github.com/users/${props.user}`)
-      .then((response) => {
-        if (response.ok) return response.json();
-        else {
-          setUserError(response);
-        }
-      })
-      .then(json => setUser(json))
-      .catch(userError => setUserError(userError))
+    setTimeout(() => {
+      fetch(`https://api.github.com/users/${props.user}`)
+        .then((response) => {
+          if (response.ok) return response.json();
+          else {
+            setUserError(response);
+          }
+        })
+        .then(json => setUser(json))
+        .catch(userError => setUserError(userError))
 
-    fetch(`https://api.github.com/users/${props.user}/repos`)
-      .then((response) => {
-        if (response.ok) return response.json();
-        else {
-          setUserError(response);
-        }
-      })
-      .then(json => setRepositories(json))
-      .catch(repositoriesError => setRepositoriesError(repositoriesError));
+      fetch(`https://api.github.com/users/${props.user}/repos`)
+        .then((response) => {
+          if (response.ok) return response.json();
+          else {
+            setUserError(response);
+          }
+        })
+        .then(json => setRepositories(json))
+        .catch(repositoriesError => setRepositoriesError(repositoriesError));
+    }, 500);
   }, [props.user]); // gledamo usera
+
 
   if (userError !== null || repositoriesError !== null) { return <div className="error-message">Sorry, user you choose doesn't exist. Try with another input.</div> };
   if (typedInUser === null || repositories === null) { return <div className="data-message">Data is loading...</div> };
