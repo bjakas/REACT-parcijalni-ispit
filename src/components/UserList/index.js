@@ -19,7 +19,12 @@ export default function UserList(props) {
       .catch(userError => setUserError(userError))
 
     fetch(`https://api.github.com/users/${props.user}/repos`)
-      .then(response => response.json())
+      .then((response) => {
+        if (response.ok) return response.json();
+        else {
+          setUserError(response);
+        }
+      })
       .then(json => setRepositories(json))
       .catch(repositoriesError => setRepositoriesError(repositoriesError));
   }, [props.user]); // gledamo usera
