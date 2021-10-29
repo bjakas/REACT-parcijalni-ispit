@@ -9,18 +9,23 @@ export default function UserList(props) {
 
   useEffect(() => {
     fetch(`https://api.github.com/users/${props.user}`)
-      .then(response => response.json())
+      .then((response) => {
+        if (response.ok) return response.json();
+        else {
+          setUserError(response);
+        }
+      })
       .then(json => setUser(json))
       .catch(userError => setUserError(userError))
 
     fetch(`https://api.github.com/users/${props.user}/repos`)
       .then(response => response.json())
       .then(json => setRepositories(json))
-      .catch(repositoriesError => setRepositoriesError(repositoriesError))
+      .catch(repositoriesError => setRepositoriesError(repositoriesError));
   }, [props.user]); // gledamo usera
 
-  if (userError !== null || repositoriesError !== null) { return <div>Sorry, there has been an error while retrieving data...</div> };
-  if (typedInUser === null || repositories === null) { return <div>Data is loading...</div> };
+  if (userError !== null || repositoriesError !== null) { return <div className="error-message">Sorry, user you choose doesn't exist. Try with another input.</div> };
+  if (typedInUser === null || repositories === null) { return <div className="data-message">Data is loading...</div> };
 
   return (
     <div>

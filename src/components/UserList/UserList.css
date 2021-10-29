@@ -29,3 +29,13 @@ caption {
   margin-top: 0px;
 	margin-bottom: 15px;
 }
+
+.error-message {
+  margin-top: 20px;
+  color: red;
+}
+
+.data-message {
+  margin-top: 20px;
+  color: rgb(5, 68, 119);
+}
